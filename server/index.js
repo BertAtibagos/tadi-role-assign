@@ -61,9 +61,9 @@ app.get('/api/period', async (req, res) => {
                 FROM schoolacademicyearperiod AS schl_acad_yr_prd
                 LEFT JOIN schoolacademicperiod AS schl_acad_prd
                     ON schl_acad_yr_prd.SchlAcadPrd_ID = schl_acad_prd.SchlAcadPrdSms_ID
-                WHERE schl_acad_yr_prd.SchlAcadLvl_ID = 2
-                AND schl_acad_yr_prd.SchlAcadYr_ID = 19
-                AND schl_acad_yr_prd.SchlAcadYrPrd_ISACTIVE = 1`;
+                WHERE schl_acad_yr_prd.SchlAcadLvl_ID = ?
+                AND schl_acad_yr_prd.SchlAcadYr_ID = ?
+                AND schl_acad_yr_prd.SchlAcadYrPrd_ISACTIVE = ?`;
 
         const [rows] = await pool.execute(sql, [2, 19, 1]);
         
