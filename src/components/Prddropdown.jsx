@@ -1,41 +1,26 @@
-import { useState, useEffect } from 'react';
-
 export default function PrddropdownComp(prop) {
-    const { style } = prop;
-    const [period, setPeriod] = useState([]);
-    const [err, setErr] = useState(null);
+    const { period, prdErr, style = '', className = '', ...rest } = prop;
 
-    useEffect(() => {
-        async function fetchPeriod() {
-            try {
-                const prdReq = await fetch('/api/period');
-                const prdRes = await prdReq.json();
-
-                if (prdReq.ok && prdRes.success) {
-                    setPeriod(prdRes.data ?? []);
-                    setErr(null);
-                } else {
-                    setErr(prdRes.message ?? 'Failed to fetch periods');
-                }
-            } catch (error) {
-                setErr(error.message);
-                console.log('Something went wrong: ', error);
-            }
-        }
-
-        fetchPeriod();
-    }, []);
+    const selectClasses = [
+        'h-11 w-full min-w-0 rounded-xl px-4 text-sm',
+        'border border-white/10 bg-white/5 text-slate-100',
+        'focus:outline-none focus:ring-2 focus:ring-blue-500/40',
+        className,
+        style,
+    ]
+        .filter(Boolean)
+        .join(' ');
 
     return (
-        <>
-            <select className={style}>
+        <div className="min-w-0">
+            <select className={selectClasses} {...rest}>
                 {period.map((item) => (
                     <option key={item.prdId} value={item.prdId}>
                         {item.prdName}
                     </option>
                 ))}
             </select>
-            {err ? <div>{err}</div> : null}
-        </>
+            {prdErr ? <p className="mt-2 text-xs text-red-400">{prdErr}</p> : null}
+        </div>
     );
 }
