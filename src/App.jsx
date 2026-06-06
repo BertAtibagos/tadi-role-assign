@@ -2,24 +2,51 @@ import Button from './components/Button';
 import Yrdropdown from './components/Yrdropdown';
 import Prddropdown from './components/Prddropdown';
 import InputField from './components/InputField';
+import { useYears } from './hooks/useYears';
+import { usePeriod} from './hooks/usePeriod';
 
 const App = () => {
+  const { years, yrErr } = useYears();
+  const { period, prdErr } = usePeriod();
+
   return (
-    <div className="grid grid-cols-1 gap-4 p-4 w-1/2 mx-auto">
-      <div className="border border-gray-600/50 rounded-2xl p-4 flex items-center justify-center gap-2">
-        <Yrdropdown style="bg-gray-600/50 rounded-xl w-64 p-2"/>
-        <Prddropdown style="bg-gray-600/50 rounded-xl w-64 p-2"/>
-        <Button 
-          style="bg-blue-600/50 rounded-xl w-24 p-2" 
-          text="Search"/>
-      </div>
-      <div>
-        <InputField 
-          style="bg-gray-600/50 rounded-xl w-64 p-2 mx-2" 
-          text="Search by name"/>
-        <Button 
-          style="bg-green-600/50 rounded-xl w-24 p-2" 
-          text="Search"/>
+    <div className="min-h-screen bg-slate-950 text-slate-100">
+      <div className="mx-auto w-full max-w-3xl px-4 py-10">
+        <div className="rounded-3xl border border-white/10 bg-white/5 p-6">
+          <div className="flex flex-col gap-6">
+            <div className="flex flex-col gap-3 md:flex-row md:items-end">
+              <div className="flex flex-1 flex-col gap-3 md:flex-row">
+                <Yrdropdown 
+                  style="w-full md:w-56" 
+                  years={years}
+                  err={yrErr}
+                />
+                <Prddropdown 
+                  style="w-full md:w-56" 
+                  period={period}
+                  err={prdErr}
+                />
+              </div>
+              <Button
+                style="w-full md:w-28 bg-blue-600/60"
+                text="Search"
+              />
+            </div>
+
+            <div className="h-px w-full bg-white/10" />
+
+            <div className="flex flex-col gap-3 md:flex-row md:items-end">
+              <InputField
+                style="w-full md:flex-1"
+                text="Search by name"
+              />
+              <Button
+                style="w-full md:w-28 bg-green-600/60"
+                text="Search"
+              />
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   )
