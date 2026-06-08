@@ -1,5 +1,11 @@
 export default function PrddropdownComp(prop) {
-    const { period, prdErr, style = '', className = '', ...rest } = prop;
+    const { period, 
+            prdErr, 
+            style = '', 
+            className = '',
+            value,
+            onChange,
+            ...rest } = prop;
 
     const selectClasses = [
         'h-11 w-full min-w-0 rounded-xl px-4 text-sm',
@@ -13,7 +19,7 @@ export default function PrddropdownComp(prop) {
 
     return (
         <div className="min-w-0">
-            <select className={selectClasses} {...rest}>
+            <select className={selectClasses} value={value} onChange={onChange} {...rest}>
                 {period.map((item) => (
                     <option key={item.prdId} value={item.prdId}>
                         {item.prdName}
