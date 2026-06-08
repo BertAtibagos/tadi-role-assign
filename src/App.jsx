@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import Button from './components/Button';
 import Yrdropdown from './components/Yrdropdown';
 import Prddropdown from './components/Prddropdown';
@@ -9,6 +10,9 @@ const App = () => {
   const { years, yrErr } = useYears();
   const { period, prdErr } = usePeriod();
 
+  const [selectedyear, setSelectedyear] = useState('')
+  const [selectedprd, setSelectedprd] = useState('')
+
   return (
     <div className="min-h-screen bg-slate-950 text-slate-100">
       <div className="mx-auto w-full max-w-3xl px-4 py-10">
@@ -19,12 +23,16 @@ const App = () => {
                 <Yrdropdown 
                   style="w-full md:w-56" 
                   years={years}
-                  err={yrErr}
+                  yrErr={yrErr}
+                  value={selectedyear}
+                  onChange={(e) => setSelectedyear(e.target.value)}
                 />
                 <Prddropdown 
                   style="w-full md:w-56" 
                   period={period}
-                  err={prdErr}
+                  prdErr={prdErr}
+                  value={selectedprd}
+                  onChange={(e) => setSelectedprd(e.target.value)}
                 />
               </div>
               <Button
