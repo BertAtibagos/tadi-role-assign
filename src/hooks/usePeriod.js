@@ -16,15 +16,12 @@ export function usePeriod() {
                 } else {
                     setErr(prdRes.message ?? 'Failed to fetch periods');
                 }
-            } catch (prdErr) {
-                setErr(prdErr.message);
-                console.log('Something went wrong: ', prdErr);
+            } catch (err) {
+                setErr(err.message);
+                console.log('Something went wrong: ', err);
             }
         }
-
         fetchPeriod();
     }, []);
-
     return { period, prdErr };
-
 }
