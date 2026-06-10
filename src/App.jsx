@@ -6,7 +6,6 @@ const App = () => {
   const { years, yrErr } = useYears();
   const { period, prdErr } = usePeriod();
 
-
   return (
     <div className="min-h-screen bg-slate-950 text-slate-100">
       <div className="mx-auto w-full max-w-3xl px-4 py-10">
