@@ -2,12 +2,14 @@ import Button from './Button';
 import Yrdropdown from './Yrdropdown';
 import Prddropdown from './Prddropdown';
 import InputField from './InputField';
+import Prgmdropdown from './Prgrmdropdown';
 import { useState } from 'react';
 
 export default function SearchFilterCardComp(props) {
     const { years, yrErr, period, prdErr } = props;
-    const [selectedyear, setSelectedyear] = useState('')
-    const [selectedprd, setSelectedprd] = useState('')
+    const [selectedYear, setSelectedYear] = useState('')
+    const [selectedPrd, setSelectedPrd] = useState('')
+    const [selectedPrgm, setSelectedPrgm] = useState('')
     
     return(
         <div className="rounded-3xl border border-white/10 bg-white/5 p-6">
@@ -18,15 +20,21 @@ export default function SearchFilterCardComp(props) {
                   style="w-full md:w-56" 
                   years={years}
                   yrErr={yrErr}
-                  value={selectedyear} 
-                  onChange={(e) => setSelectedyear(e.target.value)}
+                  value={selectedYear} 
+                  onChange={(e) => setSelectedYear(e.target.value)}
                 />
                 <Prddropdown 
                   style="w-full md:w-56" 
                   period={period}
                   prdErr={prdErr}
-                  value={selectedprd}
-                  onChange={(e) => setSelectedprd(e.target.value)}
+                  value={selectedPrd}
+                  onChange={(e) => setSelectedPrd(e.target.value)}
+                />
+                <Prgmdropdown
+                  style="w-full md:w-56"
+                  value={selectedPrgm}
+                  onChange={(e) => setSelectedPrgm(e.target.value)}
+
                 />
               </div>
               <Button
