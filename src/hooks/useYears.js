@@ -16,9 +16,9 @@ export function useYears(){
                 } else {
                     setErr(yearsRes.message ?? 'Failed to fetch years');
                 }
-            } catch (yrErr) {
-                setErr(yrErr.message);
-                console.log('Something went wrong: ', yrErr);
+            } catch (err) {
+                setErr(err.message);
+                console.log('Something went wrong: ', err);
             }
         }
 
