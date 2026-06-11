@@ -3,16 +3,25 @@ import Yrdropdown from './Yrdropdown';
 import Prddropdown from './Prddropdown';
 import InputField from './InputField';
 import Prgmdropdown from './Prgrmdropdown';
-import { useState } from 'react';
+// import { useState } from 'react';
 
 export default function SearchFilterCardComp(props) {
-    const { years, yrErr, period, prdErr } = props;
-    const [selectedYear, setSelectedYear] = useState('')
-    const [selectedPrd, setSelectedPrd] = useState('')
-    const [selectedPrgm, setSelectedPrgm] = useState('')
+    const { years, 
+            yrErr, 
+            period, 
+            prdErr, 
+            slctYr, 
+            slctPrd, 
+            ocSlctYr, 
+            ocSlctPrd,
+            slctPrgm,
+            ocSlctPrgm,
+            programList,
+            prgmErr
+          } = props;
     
     return(
-        <div className="rounded-3xl border border-white/10 bg-white/5 p-6">
+        <div className="rounded-3xl border border-white/10 bg-white/5 p-6 w-fit">
           <div className="flex flex-col gap-6">
             <div className="flex flex-col gap-3 md:flex-row md:items-end">
               <div className="flex flex-1 flex-col gap-3 md:flex-row">
@@ -20,21 +29,22 @@ export default function SearchFilterCardComp(props) {
                   style="w-full md:w-56" 
                   years={years}
                   yrErr={yrErr}
-                  value={selectedYear} 
-                  onChange={(e) => setSelectedYear(e.target.value)}
+                  value={slctYr} 
+                  onChange={(e) => ocSlctYr(e.target.value)}
                 />
                 <Prddropdown 
                   style="w-full md:w-56" 
                   period={period}
                   prdErr={prdErr}
-                  value={selectedPrd}
-                  onChange={(e) => setSelectedPrd(e.target.value)}
+                  value={slctPrd}
+                  onChange={(e) => ocSlctPrd(e.target.value)}
                 />
                 <Prgmdropdown
                   style="w-full md:w-56"
-                  value={selectedPrgm}
-                  onChange={(e) => setSelectedPrgm(e.target.value)}
-
+                  program={programList}
+                  value={slctPrgm}
+                  onChange={(e) => ocSlctPrgm(e.target.value)}
+                  prgErr={prgmErr}
                 />
               </div>
               <Button
