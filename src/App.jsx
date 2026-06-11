@@ -1,10 +1,21 @@
+import { useState, useEffect } from 'react';
 import { useYears } from './hooks/useYears';
-import { usePeriod} from './hooks/usePeriod';
+import { usePeriod } from './hooks/usePeriod';
+import { usePrograms } from './hooks/usePrograms';
 import SearchFilterCard from './components/SearchFilterCard';
 
 const App = () => {
   const { years, yrErr } = useYears();
   const { period, prdErr } = usePeriod();
+  const [selectedYearLevel, setSelectedYearLevel] = useState('')
+  const [selectedPrd, setSelectedPrd] = useState('')
+  const [selectedPrgm, setSelectedPrgm] = useState('')
+  const { programs, prgErr, fetchPrograms } = usePrograms()
+
+  useEffect(() => {
+    if(selectedYearLevel && selectedPrd){
+      fetchPrograms({yearId: selectedYearLevel, periodId: selectedPrd})
+    }},[selectedYearLevel, selectedPrd])
 
   return (
     <div className="min-h-screen bg-slate-950 text-slate-100">
@@ -13,7 +24,15 @@ const App = () => {
           years={years} 
           yrErr={yrErr} 
           period={period} 
-          prdErr={prdErr} 
+          prdErr={prdErr}
+          slctYr={selectedYearLevel}
+          ocSlctYr={setSelectedYearLevel}
+          slctPrd={selectedPrd}
+          ocSlctPrd={setSelectedPrd}
+          programList={programs}
+          prgmErr={prgErr}
+          slctPrgm={selectedPrgm}
+          ocSlctPrgm={setSelectedPrgm}
         />
       </div>
     </div>
