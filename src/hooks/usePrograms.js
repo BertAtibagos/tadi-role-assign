@@ -5,17 +5,19 @@ export function usePrograms() {
     const [prgErr, setErr] = useState(null);
     const cache = useRef(null);
 
-    const fetchPrograms =  async({yearid, periodId}={})=>{
+    const fetchPrograms =  async({yearId, periodId}={})=>{
         if (cache.current) cache.current.abort();
         cache.current = new AbortController();
         const signal = cache.current.signal;
 
         try{
-            const params = new URLSearchParams();
-            if(yearid) params.append('yearId', yearid);
-            if(periodId) params.append('periodId', periodId);
+            const prgReq = await fetch(`/api/programs`,{
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({yearId: yearId, periodId: periodId}),
+                    signal
+                });
 
-            const prgReq = await fetch(`/api/programs?${params.toString()}`,{signal})
             const prgRes = await prgReq.json();
 
             if(prgReq.ok && prgRes.success){
