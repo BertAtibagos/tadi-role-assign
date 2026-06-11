@@ -20,9 +20,10 @@ export default function PrgdropdownComp(prop){
     return(
         <div className="min-w-0">
             <select className={selectClasses} value={value} onChange={onChange} {...rest}>
-            {program.map((item, index) => (
-                <option key={index} value={item}>
-                    {item}
+            <option value="">Select Program</option>
+            {program.map((item) => (
+                <option key={item.dept_id} value={item.dept_id}>
+                    {item.dept_name}
                 </option>
             ))}
         </select>
