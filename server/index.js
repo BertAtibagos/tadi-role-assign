@@ -36,7 +36,7 @@ app.get('/api/years', async (req, res) => {
             AND SchlAcadLvl_ID = ?
             ORDER BY SchlAcadYrLvl_RANKNO`;
 
-        const [rows] = await pool.execute(sql, [1, 1, 2]);
+        const [rows] = await pool.execute(sql, [Number(1), Number(1), Number(2)]);
         
         res.json({
             success: true,
@@ -65,7 +65,7 @@ app.get('/api/period', async (req, res) => {
                 AND schl_acad_yr_prd.SchlAcadYr_ID = ?
                 AND schl_acad_yr_prd.SchlAcadYrPrd_ISACTIVE = ?`;
 
-        const [rows] = await pool.execute(sql, [2, 19, 1]);
+        const [rows] = await pool.execute(sql, [Number(2), Number(19), Number(1)]);
         
         res.json({
             success: true,
@@ -83,7 +83,7 @@ app.get('/api/period', async (req, res) => {
 
 app.post('/api/programs', async(req, res)=>{
     try{
-        const { yearId, periodId } = req.query;
+        const { yearId, periodId } = req.body;
         const sql = `SELECT DISTINCT
                         d.SchlDeptSms_ID AS dept_id,
                         d.SchlDept_CODE   AS dept_code,
@@ -96,11 +96,12 @@ app.post('/api/programs', async(req, res)=>{
                         AND yp.SchlAcadYr_ID  = o.SchlAcadYr_ID
                         AND yp.SchlAcadPrd_ID = o.SchlAcadPrd_ID
                     WHERE o.SchlAcadLvl_ID = 2
-                        AND o.SchlAcadYr_ID = ?
+                        AND o.SchlAcadYr_ID = 19
+                        AND o.SchlAcadYrLvl_ID = ?
                         AND o.SchlAcadPrd_ID = ?
-                        ORDER BY d.SchlDept_NAME`;
+                    ORDER BY d.SchlDept_NAME`;
 
-        const [rows] = await pool.execute(sql,[yearId, periodId]);
+        const [rows] = await pool.execute(sql,[Number(yearId), Number(periodId)]);
         res.json({
             success: true,
             data: rows
