@@ -20,6 +20,7 @@ export default function PrddropdownComp(prop) {
     return (
         <div className="min-w-0">
             <select className={selectClasses} value={value} onChange={onChange} {...rest}>
+                <option value="">Select Period</option>
                 {period.map((item) => (
                     <option key={item.prdId} value={item.prdId}>
                         {item.prdName}

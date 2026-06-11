@@ -20,7 +20,8 @@ export default function DropdownComp(prop) {
     return (
         <div className="min-w-0">
             <select className={selectClasses} value={value} onChange={onChange} {...rest}>
-                {years.map((item) => (
+                <option value="">Select Year</option>
+                {years.map((item) =>(
                     <option key={item.yrId} value={item.yrId}>
                         {item.yrName}
                     </option>
