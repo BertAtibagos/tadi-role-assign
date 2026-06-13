@@ -3,21 +3,25 @@ import Yrdropdown from './Yrdropdown';
 import Prddropdown from './Prddropdown';
 import InputField from './InputField';
 import Prgmdropdown from './Prgrmdropdown';
-// import { useState } from 'react';
+import Sectdropdown from './Sectdropdown';
 
 export default function SearchFilterCardComp(props) {
     const { years, 
-            yrErr, 
             period, 
-            prdErr, 
+            programList,
+            sectionList,
+            yrErr, 
+            prdErr,
+            prgmErr,
+            sectionErr,
             slctYr, 
-            slctPrd, 
+            slctPrd,
+            slctPrgm,
+            slctSect,
             ocSlctYr, 
             ocSlctPrd,
-            slctPrgm,
             ocSlctPrgm,
-            programList,
-            prgmErr
+            ocSlctSect
           } = props;
     
     return(
@@ -45,6 +49,13 @@ export default function SearchFilterCardComp(props) {
                   value={slctPrgm}
                   onChange={(e) => ocSlctPrgm(e.target.value)}
                   prgErr={prgmErr}
+                />
+                <Sectdropdown
+                  style="w-full md:w-56"
+                  section={sectionList}
+                  value={slctSect}
+                  onChange={(e) => ocSlctSect(e.target.value)}
+                  sectionErr={sectionErr}
                 />
               </div>
               <Button
