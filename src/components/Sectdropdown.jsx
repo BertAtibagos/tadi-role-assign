@@ -1,8 +1,8 @@
 export default function DropdownComp(prop){
     const { section,
             sectionErr,
-            style='', 
-            className='',
+            style = '', 
+            className = '',
             value,
             onChange,
             ...rest } = prop;
@@ -19,8 +19,8 @@ export default function DropdownComp(prop){
             <select className={selectClasses} value={value} onChange={onChange} {...rest}>
                 <option value="">Select Section</option>
                 {section.map((item) => (
-                    <option key={item} value={item}>
-                        {item}
+                    <option key={item.sec_id} value={item.sec_id}>
+                        {item.sec_name}
                     </option>
                 ))}
             </select>
