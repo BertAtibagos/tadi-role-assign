@@ -118,18 +118,17 @@ app.post('/api/programs', async(req, res)=>{
 
 app.post('/api/sections', async(req, res)=>{
     try{
-        const {yearId,periodId,deptId} = req.body;
+        const {yearLvlId,periodId,deptId} = req.body;
         const sql = `SELECT DISTINCT
-                        sec.SchlAcadSecSms_ID,
-                        sec.SchlAcadSec_NAME,
-                        sec.SchlAcadSec_CODE,
-                        off.SchlEnrollSubjOffSms_ID,
+                        sec.SchlAcadSecSms_ID sec_id,
+                        sec.SchlAcadSec_NAME sec_name,
+                        sec.SchlAcadSec_CODE sec_code,
                         crse.SchlDept_ID
-                    FROM schoolenrollmentsubjectoffered' AS off
+                    FROM schoolenrollmentsubjectoffered AS off
                     LEFT JOIN schoolacademicsection AS sec
-                        ON off.SchlAcadSec_ID = sec.'SchlAcadSecSms_ID'
+                        ON off.SchlAcadSec_ID = sec.SchlAcadSecSms_ID
                     LEFT JOIN schoolacademiccourses AS crse
-                        ON off.SchlAcadCrses_ID = crse.'SchlAcadCrseSms_ID'
+                        ON off.SchlAcadCrses_ID = crse.SchlAcadCrseSms_ID
                     WHERE crse.SchlDept_ID = ?
                         AND off.SchlAcadLvl_ID = 2
                         AND off.SchlAcadYr_ID = 19
@@ -139,7 +138,7 @@ app.post('/api/sections', async(req, res)=>{
                         AND off.SchlEnrollSubjOff_ISACTIVE = 1
                     ORDER BY sec.SchlAcadSec_NAME`;
 
-        const [rows] = await pool.execute(sql,[Number(deptId), Number(periodId), Number(yearId)]);
+        const [rows] = await pool.execute(sql,[Number(deptId), Number(periodId), Number(yearLvlId)]);
         res.json({
             success: true,
             data: rows
