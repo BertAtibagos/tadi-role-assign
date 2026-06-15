@@ -5,7 +5,7 @@ export function useSections() {
     const [sectionErr, setSecErr] = useState(null);
     const cache = useRef(null);
 
-    const fetchSections = async(yearId, periodId, deptId) => {
+    const fetchSections = async(yearLvlId, periodId, deptId) => {
         if (cache.current) cache.current.abort();
         cache.current = new AbortController();
         const signal = cache.current.signal;
@@ -14,7 +14,7 @@ export function useSections() {
             const secReq = await fetch(`/api/sections`,{
                 method: 'POST',
                 headers: {'Content-Type': 'application/json'},
-                body: JSON.stringify({yearId:yearId, periodId:periodId, deptId:deptId}),
+                body: JSON.stringify({yearLvlId:yearLvlId, periodId:periodId, deptId:deptId}),
                 signal
             });
 
