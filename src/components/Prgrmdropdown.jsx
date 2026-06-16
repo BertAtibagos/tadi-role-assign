@@ -11,15 +11,16 @@ export default function PrgdropdownComp(prop){
         'border border-white/10 bg-white/5 text-slate-100',
         'focus:outline-none focus:ring-2 focus:ring-blue-500/40',
         '[&>option]:bg-slate-900 [&>option]:text-slate-100',
+        'overflow-hidden text-ellipsis',
         style,
     ]
         .filter(Boolean)
         .join(' ');
         
     return(
-        <div className="min-w-0">
+        <div className="min-w-0 ">
             <select className={selectClasses} value={value} onChange={onChange} {...rest}>
-            <option value="">Select Program</option>
+            <option value="" disabled>Select Program</option>
             {program.map((item) => (
                 <option key={item.dept_id} value={item.dept_id}>
                     {item.dept_name}

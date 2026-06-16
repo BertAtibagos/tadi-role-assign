@@ -19,7 +19,7 @@ export default function DropdownComp(prop){
     return(
         <div className="min-w-0">
             <select className={selectClasses} value={value} onChange={onChange} {...rest}>
-                <option value="">Select Section</option>
+                <option value="" disabled>Select Section</option>
                 {section.map((item) => (
                     <option key={item.sec_id} value={item.sec_id}>
                         {item.sec_name}
