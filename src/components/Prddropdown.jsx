@@ -1,8 +1,7 @@
 export default function PrddropdownComp(prop) {
     const { period, 
             prdErr, 
-            style = '', 
-            className = '',
+            style = '',
             value,
             onChange,
             ...rest } = prop;
@@ -11,7 +10,7 @@ export default function PrddropdownComp(prop) {
         'h-11 w-full min-w-0 rounded-xl px-4 text-sm',
         'border border-white/10 bg-white/5 text-slate-100',
         'focus:outline-none focus:ring-2 focus:ring-blue-500/40',
-        className,
+        '[&>option]:bg-slate-900 [&>option]:text-slate-100',
         style,
     ]
         .filter(Boolean)
