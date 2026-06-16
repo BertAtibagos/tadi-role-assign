@@ -18,17 +18,19 @@ const App = () => {
   useEffect(() => {
     if(selectedYearLevel && selectedPrd){
       fetchPrograms({yearId: selectedYearLevel, periodId: selectedPrd})
-    }},[selectedYearLevel, selectedPrd])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }},[selectedYearLevel, selectedPrd]) 
 
   useEffect(()=>{
     if(selectedYearLevel && selectedPrd && selectedPrgm){ 
       fetchSections(selectedYearLevel, selectedPrd, selectedPrgm)
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   },[selectedYearLevel, selectedPrd, selectedPrgm])
 
   return (
     <div className="min-h-screen bg-slate-950 text-slate-100">
-      <div className="mx-auto w-full max-w-3xl px-4 py-10">
+      <div className="mx-auto w-full max-w-3xl px-4 py-10 flex justify-center">
         <SearchFilterCard 
           years={years}  
           period={period} 
