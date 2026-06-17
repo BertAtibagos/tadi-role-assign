@@ -1,5 +1,10 @@
 export default function InputFieldComp(props) {
-    const { style = '', className = '', text, ...rest } = props;
+    const { srchInput,
+            ocSrchInput,
+            style = '', 
+            className = '', 
+            text, 
+            ...rest } = props;
 
     const classes = [
         'h-11 w-full min-w-0 rounded-xl px-4 text-sm',
@@ -11,5 +16,5 @@ export default function InputFieldComp(props) {
         .filter(Boolean)
         .join(' ');
 
-    return <input type="text" className={classes} placeholder={text} {...rest} />;
+    return <input type="text" className={classes} placeholder={text} {...rest} value={srchInput} onChange={ocSrchInput} />;
 }
