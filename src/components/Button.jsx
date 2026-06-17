@@ -1,6 +1,6 @@
 
 export default function ButtonComp(props) {
-    const { style = '', className = '', text, ...rest } = props;
+    const { onClick, children, style = '', className = '', ...rest } = props;
 
     const classes = [
         'inline-flex h-11 select-none items-center justify-center rounded-xl px-4 text-sm font-medium',
@@ -15,8 +15,8 @@ export default function ButtonComp(props) {
         .join(' ');
 
     return (
-        <button type="button" className={classes} {...rest}>
-            {text}
+        <button type="button" className={classes} {...rest} onClick={onClick}>
+            {children}
         </button>
     );
 }
