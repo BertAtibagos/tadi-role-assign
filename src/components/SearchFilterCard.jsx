@@ -1,29 +1,41 @@
 import Button from './Button';
 import Yrdropdown from './Yrdropdown';
 import Prddropdown from './Prddropdown';
-import InputField from './InputField';
 import Prgmdropdown from './Prgrmdropdown';
 import Sectdropdown from './Sectdropdown';
+import SearchResComp from './SearchResComp';
+import { useClassList } from '../hooks/useClassList';
 
 export default function SearchFilterCardComp(props) {
     const { years, 
             period, 
             programList,
             sectionList,
+
             yrErr, 
             prdErr,
             prgmErr,
             sectionErr,
+
             slctYr, 
             slctPrd,
             slctPrgm,
             slctSect,
+
             ocSlctYr, 
             ocSlctPrd,
             ocSlctPrgm,
             ocSlctSect
           } = props;
-    
+
+    const {data, error, fetchSearchRes } = useClassList();
+
+    const searchHandler = () => {
+          if(slctYr && slctPrd && ocSlctSect){
+            fetchSearchRes(slctYr, slctPrd, slctSect);
+          }
+    }
+
     return(
         <div className="rounded-3xl border border-white/10 bg-white/5 p-6 w-fit">
           <div className="flex flex-col gap-6">
@@ -58,24 +70,15 @@ export default function SearchFilterCardComp(props) {
                   sectionErr={sectionErr}
                 />
               </div>
-              <Button
+              <Button 
                 style="w-full md:w-28 bg-blue-600/60"
-                text="Search"
-              />
+                onClick={searchHandler}
+                disabled={!(slctYr && slctPrd && slctPrgm && slctSect)}>
+                Search
+              </Button>
             </div>
-
             <div className="h-px w-full bg-white/10" />
-
-            <div className="flex flex-col gap-3 md:flex-row md:items-end">
-              <InputField
-                style="w-full md:flex-1"
-                text="Search by name"
-              />
-              <Button
-                style="w-full md:w-28 bg-green-600/60"
-                text="Search"
-              />
-            </div>
+            <SearchResComp />
           </div>
         </div>
     );
