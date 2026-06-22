@@ -3,12 +3,14 @@ import InputField from './InputField';
 import Button from './Button';
 import ClassListTable from './ClassListTable';
 
-export default function SearchResComp() {
+export default function SearchResComp(props) {
     const [srchInput, setSrchInput] = useState('');
-    const data = true; 
+    const { classList, classErr } = props;
+
+    if(classErr) return <p className="text-red-500">Something went wrong.</p>;
 
     return(
-             data ? <>
+             classList ? <>
                         <div className="flex flex-col md:flex-row gap-3 w-full">
                             <InputField
                                 style="w-full md:flex-1"
@@ -20,7 +22,9 @@ export default function SearchResComp() {
                                     Search
                             </Button>
                         </div>
-                        <ClassListTable />
+                        <ClassListTable
+                            classListData={classList}
+                        />
                     </>
             : <div className="flex justify-center">
                 <p className="text-slate-400">Select all from the filter above to start searching</p>
