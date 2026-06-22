@@ -5,16 +5,16 @@ export function useClassList(){
     const [error, setError] = useState(null);
     const cache = useRef(null);
 
-    const fetchSearchRes = async (year, period, section) => {
+    const fetchSearchRes = async (section) => {
         if (cache.current) cache.current.abort();
         cache.current = new AbortController();
         const signal = cache.current.signal;
 
         try{
-            const searchResReq = await fetch(`api/classList`,{
+            const searchResReq = await fetch(`/api/classList`,{
                 method: 'POST',
                 headers: {'Content-Type': 'application/json'},
-                body: JSON.stringify({yearId: year, periodId: period, sectionId: section}),
+                body: JSON.stringify({sectionId: section}),
                 signal
             });
 
