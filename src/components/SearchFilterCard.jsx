@@ -31,8 +31,8 @@ export default function SearchFilterCardComp(props) {
     const {data, error, fetchSearchRes } = useClassList();
 
     const searchHandler = () => {
-          if(slctYr && slctPrd && ocSlctSect){
-            fetchSearchRes(slctYr, slctPrd, slctSect);
+          if(ocSlctSect){
+            fetchSearchRes(slctSect);
           }
     }
 
@@ -78,7 +78,10 @@ export default function SearchFilterCardComp(props) {
               </Button>
             </div>
             <div className="h-px w-full bg-white/10" />
-            <SearchResComp />
+            <SearchResComp 
+              classList={data}
+              classErr={error}
+            />
           </div>
         </div>
     );
