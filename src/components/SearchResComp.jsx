@@ -27,7 +27,7 @@ export default function SearchResComp(props) {
                             />
                         </>
             : <div className="flex justify-center">
-                <p className="text-slate-400">Select all from the filter above to start searching</p>
+                <p className="text-slate-400">Select first all the filter above to start searching</p>
             </div>
     );
 }
